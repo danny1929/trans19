@@ -1,0 +1,146 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to TRANS-19</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/stylehomepage.css'%}">
+</head>
+
+<body bgcolor="3aafa9">
+    <!-------------------------------- Navigation Bar div class="menu" -------------------------------->
+    <header>
+        <div class="menu">
+          <ul>
+            <li class="logo"><a href="{% url 'home' %}"><img src="{% static 'media/logo_navigation.png' %}" style = "max-width: 100%;" alt ="TRANS-19"></a></li>
+            <li class="dropdown">
+              <a href="{% url 'patients' %}" class="dropbtn">Patients</a>
+              <div class="dropdown-content">
+                <a href="{% url 'addpatient' %}" >New Patient</a>
+                <a href="{% url 'patients' %}" >View All Patients</a>
+              </div>
+            </li>
+
+            <li class="dropdown">
+              <a href="{% url 'locations' %}" class="dropbtn">Locations</a>
+              <div class="dropdown-content">
+                <a href="{% url 'addlocation' %}">New Location</a>
+                <a href="{% url 'locations' %}" >View All Location</a>
+              </div>
+            </li>
+
+            {% if user.is_epidemiologist == True %}
+            <li class="dropdown">
+              <a href="{% url 'searchconnection' %}">Search Connection</a>
+            </li>
+            {% endif %}
+
+            <li class="dropdown" style="float:right; border-left: 1px solid white;  border-right: 0px solid white;  ">
+              <a href="{% url 'locations' %}" class="dropbtn">Hi! <u>{{user.username}}</u></a>
+              <div class="dropdown-content">
+                  <a href="#">Profile</a>
+                  <a href="{% url 'logout' %}">Logout</a>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+    </header>
+    <!-------------------------------- Navigation Bar div class="menu" -------------------------------->
+
+
+
+    <!-------------------------------------------- BODY ----------------------------------------------->
+    <div class="row">
+        <!-- LEFT COLUMN-->
+        <div class="column">
+            <div class="img-container">
+                <img src="{% static 'media/logo_welcome.png' %}" alt="Welcome to Trans-19" style="position: relative; width: 59%;">
+            </div>
+        </div>
+        <!-- RIGHT COLUMN-->
+        <div class="column">
+            <!--FLEXBOX-->
+            <div class="rows">
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'patients' %}">
+                        <img src="{% static 'media/patientcorner.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">View All Patients</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'addpatient' %}">
+                        <img src="{% static 'media/addnewpatient.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Add New Patient</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'locations' %}">
+                        <img src="{% static 'media/locationcorner.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">View All Locations</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'addlocation' %}">
+                        <img src="{% static 'media/addnewlocation.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Add New Location</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                {% if user.is_epidemiologist == True %}
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'searchconnection' %}">
+                        <img src="{% static 'media/searchconnection.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Search For Connection</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="columns">
+                    <div class="container">
+                        <a href="{% url 'logout' %}">
+                        <img src="{% static 'media/logout.png' %}" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Log Out</div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                {% if user.is_epidemiologist == False %}
+                <div class="columns">
+                    <div class="container"></div>
+                </div>
+                {% endif %}
+
+            </div>
+            <!--FLEXBOX-->
+        </div>
+    </div>
+    <!-------------------------------------------- BODY ----------------------------------------------->
+</body>
+
+</html>
